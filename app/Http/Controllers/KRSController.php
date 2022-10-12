@@ -116,6 +116,9 @@ class KRSController extends Controller
             //     ]);
             // }
             return response()->json(['result'=>$request->id]);
+
+            
+            return dd("test");
         } catch (\Throwable $th) {
             return redirect()->back()->with('toast_error',  'Data tidak berhasil diubah!');
         }

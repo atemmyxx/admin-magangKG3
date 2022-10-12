@@ -20,6 +20,7 @@ class StudentsController extends Controller
     {
         try {
             $data = Students::all();
+
             // $countMajor = $data->map->only(['major_id']);
             // $overallQuery = [];
             // for($i=0;$i<2;$i++){

@@ -10,6 +10,8 @@
     @include('_partial._header')
     {{-- ==============. HEADER ============== --}}
 
+    {{-- @yield('test_js')   --}}
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
