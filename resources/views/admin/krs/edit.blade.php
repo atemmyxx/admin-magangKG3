@@ -1,11 +1,6 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @extends('_layout.layout_main')
 
-{{-- @section('test_js')
-    <script>
-        alert("test")
-    </script>
-@endsection --}}
 
 @section('content')
     <nav aria-label="breadcrumb">
@@ -135,6 +130,7 @@
                                 {{ $x->count }}
                             </div>
                             <div class="col">
+                                @if ($x->status == "PENDING")
                                 <div class="d-flex flex-row justify-content-evenly">
                                     <button class="btn btn-success p-2" value="true" type="submit" id="ajax-submit" data-id={{ $x->id }}>
                                         <i class="fa fa-icon fa-check" style="pointer-events:none"></i>
@@ -143,6 +139,7 @@
                                         <i class="fa fa-icon fa-times"></i>
                                     </button>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -151,6 +148,8 @@
         </div>
     </div>
 @endsection
+
+
 
 @section('sweetalert')
     {{-- DELETE WITH SWEETALERT --}}
@@ -168,10 +167,9 @@
 
 
             $("button#ajax-submit").click(function(e){
-                // if(e.target.)
-                console.log(e.target);
                 let id = $(this).attr('data-id');
-        
+                const value = $(this).attr("value");
+                
 
 
                 $.ajaxSetup({
@@ -183,10 +181,22 @@
                     url: `{{ url('/krs-update/${id}') }}`,
                     method: "POST",
                     data: {
-                        id: id
+                        value,
+                    },
+                    beforeSend: function(){
+                        swal({
+                title:"", 
+                text:"Loading...",
+                icon: "https://www.boasnotas.com/img/loading2.gif",
+                buttons: false,      
+                closeOnClickOutside: false,
+                timer: 3000,
+                allowOutsideClick: false
+            });
                     },
                     success: function(result) {
-                        console.log(result)
+                       e.target.parentElement.remove();
+                       swal.stopLoading();
                     },
                     error: function(err){
                         console.log(err);

@@ -10,7 +10,6 @@
     @include('_partial._header')
     {{-- ==============. HEADER ============== --}}
 
-    {{-- @yield('test_js')   --}}
 
 </head>
 
