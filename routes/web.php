@@ -14,6 +14,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\KRSController;
+use App\Http\Controllers\OptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,6 +130,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/krs-edit/{id}', [KRSController::class, 'edit']);
     Route::post('/krs-update/{id}', [KRSController::class, 'update']);
 
+    //Option
+    Route::get('/option', [OptionController::class, 'index']);
+    Route::post('/getmatakuliah', [OptionController::class, 'getmatakuliah'])->name('getmatakuliah');
 
 });
 // Tidak perlu login pun bisa di akses :)
